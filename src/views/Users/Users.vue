@@ -3,12 +3,9 @@
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-1"><b-button variant="success" v-on:click="btn_add_user()" style="color:white">Create Users</b-button></div>
+                    <div class="col-sm-2"><b-button variant="success"  style="color: white;padding: 6px;font-size: 14px;margin-bottom: 19px;" v-on:click="btn_add_user()" >Create Users</b-button></div>
                     <div class="col-sm-11">
-                        <div class="search-box">
-                            <i class="material-icons">&#xE8B6;</i>
-                            <input type="text" class="form-control" v-model="search" placeholder="Search&hellip;">
-                        </div>
+                     
                     </div>
                 </div>
             </div>
