@@ -1,30 +1,23 @@
 <template>
-  <div class="vue-tempalte">
-    <!-- Navigation -->
-    <nav class="navbar shadow bg-white rounded justify-content-between flex-nowrap flex-row fixed-top">
-      <div class="container">
-       <Master></Master>
-      </div>
-    </nav>
+<div class="d-flex" id="wrapper">
+         <!-- Sidebar -->
+           <Sidebar></Sidebar>
+        <!-- /#sidebar-wrapper -->
+         <div id="page-content-wrapper">
+           <Navbar></Navbar>
+         <!-- /#content-wrapper -->
+            <router-view />
+         </div>
+</div>
 
-    <!-- Main -->
-    <div class="App">
-      <div class="vertical-center">
-          <router-view />
-      </div>
-    </div>
-  </div>
 </template>
-
 <script>
-import Master from "@/components/Layouts/Master.vue";
+import Sidebar from '@/views/Layouts/Sidebar.vue';
+import Navbar from '@/views/Layouts/Navbar.vue'
 export default {
-  name: 'app',
-   components: {
-    Master
+    components: {
+    Sidebar,
+    Navbar
   }
 }
 </script>
-
-<style>
-</style>

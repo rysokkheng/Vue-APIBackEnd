@@ -1,11 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import '@/assets/css/main.css'
-
 
 Vue.use(Router);
-
-
 
 export default new Router({
   mode: 'history',
@@ -13,13 +9,34 @@ export default new Router({
     {
         path: "/login",
         name: "login",
-        component: () => import('../components/Auth/Login.vue')
+        component: () => import('../views/Auth/Login.vue')
     },
     {
       path: "/dashboard",
       name: "dashboard",
-      component: () => import('../components/Dashboard.vue')
-  }
+      component: () => import('../views/Dashboard.vue')
+    },
+    {
+      path: "/users/create",
+      name: "usercreate",
+      component: () => import('../views/Users/UserCreate.vue')
+    },
+    {
+      path: "/users",
+      name: "users",
+      component: () => import('../views/Users/Users.vue')
+    },
+    
+    {
+      path: "/roles",
+      name: "roles",
+      component: () => import('../views/Roles/Roles.vue')
+    },
+    {
+      path: "*",
+      name: "pagenotfound ",
+      component: () => import('../views/PageNotFound.vue')
+    }
   
 ]
 })
