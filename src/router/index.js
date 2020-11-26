@@ -7,6 +7,12 @@ export default new Router({
   mode: 'history',
   routes: [
     {
+      path: '/',
+      redirect: {
+          name: "login"
+        }
+    },
+    {
         path: "/login",
         name: "login",
         component: () => import('../views/Auth/Login.vue')

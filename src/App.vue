@@ -1,13 +1,13 @@
 <template>
 <div class="d-flex" id="wrapper">
-         <!-- Sidebar -->
-           <Sidebar></Sidebar>
-        <!-- /#sidebar-wrapper -->
-         <div id="page-content-wrapper">
-           <Navbar></Navbar>
-         <!-- /#content-wrapper -->
-            <router-view />
-         </div>
+  <!-- Sidebar -->
+    <Sidebar></Sidebar>
+  <!-- /#sidebar-wrapper -->
+  <div id="page-content-wrapper">
+    <Navbar></Navbar>
+  <!-- /#content-wrapper -->
+    <router-view />
+  </div>
 </div>
 
 </template>

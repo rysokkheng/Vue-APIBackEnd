@@ -43,7 +43,7 @@ color: #42b983;
 }
 
 #sidebar-wrapper .sidebar-heading {
-  padding: 0.55rem 1.5rem 1.2rem 0.2rem;
+  padding: 0.55rem 3.5rem 1.2rem 3.2rem;
   font-size: 1.2rem;
 }
 
@@ -73,12 +73,11 @@ color: #42b983;
 .list-group-item {
   position: relative;
     display: block;
-    padding: .75rem 1.25rem;
+    padding: 0.95rem 1.25rem !important;
     background-color: #fff;
     border: 1px solid #fdfcfc20 !important;
 }
 #sidebar-wrapper .list-group {
-  width: 13rem;
   text-align: left;
   font-size: 14px;
 }
@@ -137,17 +136,18 @@ color: #42b983;
   border-bottom: 1px solid #9596A2;
  }
  .login .form .form-field label {
-  width: 10px;
-  padding: 0 15px 0 0;
+ 
   color: #9596A2;
  }
  .login .form .form-field input {
-  width: 100%;
-  background: transparent;
-  color: #9596A2;
-  padding: 15px;
-  border: 0;
-  margin: 0;
+  width: 100 !important;
+  background: transparent !important;
+  color: #9596A2 !important;
+  padding: 15px 0px 0px 10px !important;
+  border: 0 !important;
+  margin: 0 !important;
+  font-size: 15px;
+
  }
  .login .form .form-field input + svg {
   width: 35px;
@@ -178,6 +178,7 @@ color: #42b983;
   margin: 0;
   color: white;
   border: 0;
+  font-size: 16px;
   background: blue;
   outline: none;
  }

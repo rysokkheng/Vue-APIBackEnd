@@ -1,5 +1,4 @@
 <template>
-<div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
@@ -57,7 +56,7 @@
             </div>
         </div>
     </div>  
-</div>
+
 
 </template>
 

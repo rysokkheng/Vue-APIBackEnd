@@ -3,11 +3,11 @@
     <form class="form">
       <h2>API Back End</h2>
       <div class="form-field">
-        <label for="login-username"><i class="fa fa-user"></i></label>
+        <label for="login-username" style="margin-top: 15px;"><i class="fa fa-user fa-2x"></i>&nbsp;</label>
         <input type="text" id="username" v-model="username" name="username" placeholder="Username" required autocomplete="off">
       </div>
       <div class="form-field">
-        <label for="login-password"><i class="fa fa-lock"></i></label>
+        <label for="login-password" style="margin-top: 15px;"><i class="fa fa-lock fa-2x"></i>&nbsp;</label>
         <input id="password" v-model="password" type="password" name="password" placeholder="Password" required>
       </div>
       <button class="button" v-on:click="login()" > Login </button>
@@ -33,7 +33,7 @@ export default {
     login: function() {   
           try {
             if (this.username != "" || this.password != "") {
-              loginUser(this.username, this.password)
+               loginUser(this.username, this.password)
                this.$router.push({ name: 'dashboard' })
 
             }
