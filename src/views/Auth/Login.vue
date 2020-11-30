@@ -10,7 +10,7 @@
         <label for="login-password" style="margin-top: 15px;"><i class="fa fa-lock fa-2x"></i>&nbsp;</label>
         <input id="password" v-model="password" type="password" name="password" placeholder="Password" required>
       </div>
-      <button class="button" v-on:click="login()" > Login </button>
+      <button class="button" @click="login" > Login </button>
     </form>
   </div>
 </template>

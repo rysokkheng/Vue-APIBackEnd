@@ -1,11 +1,20 @@
 <template>
+<div class="allmain">
+  <div class="title-main">&nbsp;&nbsp; Users List</div>
+  <div class="twomain">
     <div class="table-responsive">
         <div class="table-wrapper">
+           <div class="loader" v-if="loading">
+              <span class="helper"></span>
+              <img class="loaderImg" src="@/assets/ajax-loader.gif">
+            </div>
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-2"><b-button variant="success"  style="color: white;padding: 6px;font-size: 14px;margin-bottom: 19px;" v-on:click="btn_add_user()" >Create Users</b-button></div>
-                    <div class="col-sm-11">
-                     
+                      <div class="col-sm-7">
+                      </div>
+                    <div class="col-sm-3">
+                     <input type="text" v-model="search" class="form-control" id="telefoon" style="font-size: 15px;" placeholder="Search...">
                     </div>
                 </div>
             </div>
@@ -18,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in items" v-bind:key="item.id">
+                    <tr v-for="item in filteredItems " v-bind:key="item.id">
                         <td>{{ item.id }}</td>
                         <td>{{ item.fullname }}</td>
                         <td>{{ item.username }}</td>
@@ -53,7 +62,8 @@
             </div>
         </div>
     </div>  
-
+  </div>
+</div>
 
 </template>
 
@@ -67,6 +77,7 @@ export default {
    data () {
     return {
       search: '',
+      loading: false,
       selected: [],
       headers: [
         { text: 'No', value: 'id' },
@@ -95,32 +106,33 @@ export default {
   },
   methods : {
       getData(){
+          this.loading = true;
           const Token = getAuthToken()
           const GetUser = http.get('user').then(response => {
             this.items = response.data.data.data;  
             this.count_page = response.data.data.meta.pagination; 
             this.total_page = response.data.data.meta.pagination;
-            this.current_page = response.data.data.meta.pagination
+            this.current_page = response.data.data.meta.pagination;
+            setTimeout(() => this.loading = false,1000);
           }).catch((error)=>{
             console.log(error)
-        })                            
+        }).fi                         
       },
      btn_add_user : function () {
          this.$router.push("/users/create");
      }
   },
-  computed : {
-    test(){
-      if(this.search){
-        console.log('sdsss')
-      return this.headers.filter((item)=>{
-       return item.text.startsWith(this.search);
-      })
-      }else{
-        return this.headers;
-      }
+   computed: {
+    filteredItems() {
+      var self = this;
+      return this.items.filter(item => {
+         return item.fullname.toLowerCase().indexOf(self.search.toLowerCase()) >= 0 
+             || item.username.toLowerCase().indexOf(self.search.toLowerCase()) >= 0 
+             || item.phone.toLowerCase().indexOf(self.search.toLowerCase()) >= 0;
+              
+      }) 
     }
   }
-  
+   
 }
 </script>

@@ -11,7 +11,16 @@ import '@/assets/vendor/bootstrap/js/bootstrap.bundle.min.js';
 
 
 
-import { BootstrapVue, IconsPlugin ,VBTooltipPlugin,FormPlugin,FormGroupPlugin,FormDatepickerPlugin ,FormCheckboxPlugin ,FormSelectPlugin   } from 'bootstrap-vue'
+import {
+   BootstrapVue, 
+  IconsPlugin ,
+  VBTooltipPlugin,
+  FormPlugin,
+  FormGroupPlugin,
+  FormDatepickerPlugin ,
+  FormCheckboxPlugin ,
+  FormSelectPlugin   
+} from 'bootstrap-vue'
 
 
 Vue.use(FormSelectPlugin);
@@ -22,6 +31,8 @@ Vue.use(FormGroupPlugin);
 Vue.use(FormPlugin);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
+Vue.use(require('vue-moment'));
+
 
 Vue.use(Vuex);
 

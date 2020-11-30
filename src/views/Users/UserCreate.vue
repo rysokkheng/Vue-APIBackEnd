@@ -1,42 +1,49 @@
 <template>
-    <div class="main_container">
-        <div class="title"><h4>User Creation Form</h4></div>
-        <div class="information"><h6>User Information</h6></div>
-        <b-form  class="bform" @submit="onSubmit">
+    <div class="allmain">
+      <div class="title-main">&nbsp;&nbsp; User Creation Info</div>
+        <div class="twomain">
+            <b-form  class="bform" @submit="onSubmit">
             <b-row>
-               <b-col >
+                <b-col >
                      <label class="label">Fullname</label>
-                    <b-form-input type="text" placeholder="Fullname" v-model="fullname"  require autocomplete="off"></b-form-input></b-col>
-               <b-col> 
+                    <b-form-input type="text" placeholder="Fullname" v-model="fullname"  require autocomplete="off"></b-form-input>
+                </b-col>
+                <b-col> 
                     <label class="label">Username</label>
-                   <b-form-input type="text" placeholder="Username" v-model="username" require autocomplete="off"></b-form-input></b-col>
+                   <b-form-input type="text" placeholder="Username" v-model="username" require autocomplete="off"></b-form-input>
+                </b-col>
             </b-row>
-             <b-row>
+            <b-row>
                <b-col>
-                     <label class="label">Email</label>
-                    <b-form-input type="text" placeholder="Email" v-model="email" require autocomplete="off"></b-form-input></b-col>
+                     <label for="input-with-list" class="label">Email</label>
+                    <b-form-input type="text" placeholder="Email" v-model="email" require autocomplete="off"></b-form-input>
+                </b-col>
                <b-col> 
                     <label class="label">Phone</label>
-                   <b-form-input type="text" placeholder="Phone" v-model="phone" require autocomplete="off"></b-form-input></b-col>
+                   <b-form-input type="text" placeholder="Phone" v-model="phone" require autocomplete="off"></b-form-input>
+                </b-col>
             </b-row>
-             <b-row>
+            <b-row>
                <b-col>
                      <label class="label">Password</label>
-                    <b-form-input type="password" placeholder="Password" v-model="password" require autocomplete="off"></b-form-input></b-col>
+                    <b-form-input type="password" placeholder="Password" v-model="password" require autocomplete="off"></b-form-input>
+                </b-col>
                <b-col> 
                     <label class="label">Confirm-Password</label>
-                   <b-form-input type="password" placeholder="Confirm-Password" v-model="password_confirmation" require autocomplete="off"></b-form-input></b-col>
+                   <b-form-input type="password" placeholder="Confirm-Password" v-model="password_confirmation" require autocomplete="off"></b-form-input>
+                </b-col>
             </b-row>
-             <b-row>
+            <b-row>
                <b-col>
                      <label class="label">Organization</label>
-                    <b-form-input type="text" placeholder="Organization" v-model="organization" require autocomplete="off"></b-form-input></b-col>
+                    <b-form-input type="text" placeholder="Organization" v-model="organization" require autocomplete="off"></b-form-input>
+               </b-col>
                <b-col> 
                     <label class="label">Home Page</label>
                     <b-form-select
+                    class="form-control"
                     v-model="selected"
                     :options="options"
-                    class="mb-3"
                     value-field="item"
                     text-field="name"
                     disabled-field="notEnabled"
@@ -45,13 +52,13 @@
             </b-row>
            <b-row>
                <b-col> 
-                   <h5 style=" float: left !important;">Assign Roles</h5>
+                   <h5 style=" float: left !important;margin-top: 10px;font-size: 18px;">Assign Roles</h5>
                </b-col>
            </b-row>
             <b-row>
-               <b-col class="formcheck"> 
-                <b-form-checkbox-group id="checkbox-group-2" v-model="selected" v-for="rol in Dataroles" v-bind:key="rol.id" name="flavour-2">
-                    <b-form-checkbox  v-model="roles" :value="rol.id">{{rol.username}}</b-form-checkbox>
+               <b-col class="formcheck" style="margin-top: -15px;"> 
+                <b-form-checkbox-group id="checkbox-group-5" v-model="selected" v-for="rol in Dataroles" v-bind:key="rol.id" >
+                    <b-form-checkbox  v-model="roles" plain :value="rol.id">{{rol.username}}</b-form-checkbox>
                 </b-form-checkbox-group>
                 
             </b-col>
@@ -63,6 +70,7 @@
                 <b-button variant="success" type="submit" style="color:white">Save</b-button> </b-col>
            </b-row>
         </b-form>
+        </div>
     </div>
 </template>
 <script>
@@ -107,7 +115,7 @@ export default {
             console.log(error)
         })                            
       },
-         onSubmit() {
+    onSubmit() {
              if (this.fullname !='' && this.username !='' && this.email !='' && this.roles !='' && this.phone !=''
                 && this.password !='' && this.password_confirmation !='' && this.organization !='' && this.homepage !='') {
                 http.post('users', {
@@ -140,4 +148,3 @@ export default {
     }
 }
 </script>
-
