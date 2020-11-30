@@ -1,13 +1,132 @@
 <template>
-   <b-container fluid class="bv-example-row">
-  <b-row>
-    <b-col sm="9">
-      Level 1: sm="9"
-      <b-row>
-        <b-col cols="8" sm="6">Level 2: cols="8" sm="6"</b-col>
-        <b-col cols="4" sm="6">Level 2: cols="4" sm="6"</b-col>
-      </b-row>
-    </b-col>
-  </b-row>
-</b-container>
+<div class="allmain">
+  <div class="title-main">&nbsp;&nbsp; Roles List</div>
+  <div class="twomain">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+           <div class="loader" v-if="loading">
+              <span class="helper"></span>
+              <img class="loaderImg" src="@/assets/ajax-loader.gif">
+            </div>
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-2"><b-button variant="success"  style="color: white;padding: 6px;font-size: 14px;margin-bottom: 19px;" v-on:click="btn_add_user()" >Create Roles</b-button></div>
+                      <div class="col-sm-7">
+                      </div>
+                    <div class="col-sm-3">
+                     <input type="text" v-model="search" class="form-control" id="telefoon" style="font-size: 15px;" placeholder="Search...">
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                      <th sty v-for="colum in headers" v-bind:key="colum.id">
+                        {{colum.text}}
+                      </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in filteredItems " v-bind:key="item.id">
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.roles }}</td>
+                        <td>{{ item.description }}</td>
+                        <td><a v-if="item.status=='1'">
+                          <b-icon variant="success " icon="check-circle-fill" aria-hidden="true"></b-icon></a>
+                          <a v-else><b-icon variant="danger " icon="check-circle" aria-hidden="true"></b-icon></a>
+                        </td>
+                        <td>{{ item.created_at }}</td>
+                        <td>
+                          <b-link href="#foo"><b-icon variant="success " icon="eye-fill" aria-hidden="true"></b-icon></b-link>
+                          <b-link href="#foo"><b-icon variant="primary" icon="pencil-fill" aria-hidden="true"></b-icon></b-link>
+                          <b-link href="#foo"><b-icon variant="danger" icon="trash-fill" aria-hidden="true"></b-icon></b-link>
+                        </td>
+                    </tr>
+                     
+                </tbody>
+            </table>
+            <div class="clearfix">
+                <div class="hint-text">Showing <b>{{count_page.count}}</b> out of <b>{{total_page.total}}</b> entries</div>
+                <ul class="pagination">
+                    <li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item "><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                    <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>  
+  </div>
+</div>
+
 </template>
+
+<script>
+import axios from "axios";
+import Vue from 'vue';
+import http from '@/http';
+import Vuex from 'vuex';
+import {getAuthToken} from '@/utils/auth.js';
+export default {
+   data () {
+    return {
+      search: '',
+      loading: false,
+      selected: [],
+      headers: [
+        { text: 'No', value: 'id' },
+        { text: 'name', value: 'name' },
+        { text: 'Role', value: 'roles' },
+        { text: 'Description', value: 'description' },
+        { text: 'Status', value: 'status' },
+        { text: 'Create Date', value: 'created_at'},
+        { text: 'Action', value: 'action', sortable: false }
+      ],
+      items: [],
+      count_page : 0,
+      total_page : 0,
+      current_page : 0,
+      per_page :0,
+      next_page : [],
+      first_page : [],
+
+    
+    }
+  },
+  created: function(){
+      this.getData()
+  },
+  methods : {
+      getData(){
+          this.loading = true;
+          const Token = getAuthToken()
+          const GetUser = http.get('role').then(response => {
+            this.items = response.data.data.data;  
+            this.count_page = response.data.data.meta.pagination; 
+            this.total_page = response.data.data.meta.pagination;
+            this.current_page = response.data.data.meta.pagination;
+            setTimeout(() => this.loading = false,1000);
+          }).catch((error)=>{
+            console.log(error)
+        }).fi                         
+      },
+    
+  },
+   computed: {
+    filteredItems() {
+      var self = this;
+      return this.items.filter(item => {
+         return item.name.toLowerCase().indexOf(self.search.toLowerCase()) >= 0 
+             || item.roles.toLowerCase().indexOf(self.search.toLowerCase()) >= 0 
+             || item.description.toLowerCase().indexOf(self.search.toLowerCase()) >= 0;
+              
+      }) 
+    }
+  }
+   
+}
+</script>
