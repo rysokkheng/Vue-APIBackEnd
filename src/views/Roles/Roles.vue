@@ -10,7 +10,7 @@
             </div>
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-2"><b-button variant="success"  style="color: white;padding: 6px;font-size: 14px;margin-bottom: 19px;" v-on:click="btn_add_user()" >Create Roles</b-button></div>
+                    <div class="col-sm-2"><b-button variant="success"  style="color: white;padding: 6px;font-size: 14px;margin-bottom: 19px;" v-on:click="AddRoles()" >Create Roles</b-button></div>
                       <div class="col-sm-7">
                       </div>
                     <div class="col-sm-3">
@@ -109,10 +109,13 @@ export default {
             this.count_page = response.data.data.meta.pagination; 
             this.total_page = response.data.data.meta.pagination;
             this.current_page = response.data.data.meta.pagination;
-            setTimeout(() => this.loading = false,1000);
+            this.loading = false;
           }).catch((error)=>{
             console.log(error)
-        }).fi                         
+        })                       
+      },
+     AddRoles : function () {
+         this.$router.push("/roles/create");
       },
     
   },

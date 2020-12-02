@@ -19,9 +19,15 @@ padding: 30px;
 font-weight: bold;
 color: #2c3e50;
 }
+.authuser{
+  margin-left: 370px;
+  font-size: 15px;
+  color: blue;
+  font-weight: 400;
+}
 .datimes{
   text-align: center;
-  margin-left: 500px;
+  margin-left: 460px;
   font-size: 14px;
   color: blue;
   font-weight: 400;
@@ -499,3 +505,4 @@ color: #42b983;
     content: "";
     background: no-repeat 50%/50% 50%;
 }
+

@@ -10,7 +10,7 @@
             </div>
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-2"><b-button variant="success"  style="color: white;padding: 6px;font-size: 14px;margin-bottom: 19px;" v-on:click="btn_add_user()" >Create Users</b-button></div>
+                    <div class="col-sm-2"><b-button variant="success"  style="color: white;padding: 6px;font-size: 14px;margin-bottom: 19px;" v-on:click="AddUsers()" >Create Users</b-button></div>
                       <div class="col-sm-7">
                       </div>
                     <div class="col-sm-3">
@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in filteredItems " v-bind:key="item.id">
+                    <tr v-for="(item, index) in filteredItems " v-bind:key="index">
                         <td>{{ item.id }}</td>
                         <td>{{ item.fullname }}</td>
                         <td>{{ item.username }}</td>
@@ -40,9 +40,9 @@
                         </td>
                         <td>{{ item.created_at }}</td>
                         <td>
-                          <b-link href="#foo"><b-icon variant="success " icon="eye-fill" aria-hidden="true"></b-icon></b-link>
+                          <b-link href="javascript:void(0)" v-on:click="UserViewer()" ><b-icon variant="success "  icon="eye-fill" aria-hidden="true"></b-icon></b-link>
                           <b-link href="#foo"><b-icon variant="primary" icon="pencil-fill" aria-hidden="true"></b-icon></b-link>
-                          <b-link href="#foo"><b-icon variant="danger" icon="trash-fill" aria-hidden="true"></b-icon></b-link>
+                          <b-link href="javascript:void(0)" v-on:click="UsersDelete(item.id,index)" ><b-icon variant="danger" icon="trash-fill" aria-hidden="true"></b-icon></b-link>
                         </td>
                     </tr>
                      
@@ -106,21 +106,40 @@ export default {
   },
   methods : {
       getData(){
-          this.loading = true;
+         this.loading = true;
           const Token = getAuthToken()
           const GetUser = http.get('user').then(response => {
             this.items = response.data.data.data;  
             this.count_page = response.data.data.meta.pagination; 
             this.total_page = response.data.data.meta.pagination;
             this.current_page = response.data.data.meta.pagination;
-            setTimeout(() => this.loading = false,1000);
+            this.loading = false;
+            
           }).catch((error)=>{
-            console.log(error)
-        }).fi                         
+            console.log(error);
+
+        })                        
       },
-     btn_add_user : function () {
+     AddUsers : function () {
          this.$router.push("/users/create");
+      },
+     UsersDelete : function(id,index){
+      if(confirm("Do you really want to delete?")){
+        http.delete('/user/'+id)
+        .then(resp => {
+          console.log( this.items)
+            this.items.splice(index,1);
+            return items.id != id;
+        })
+        .catch(error => {
+            console.log(error);
+        })
+      }
+     },
+     UserViewer : function(){
+       this.$router.push("/users/viewer");
      }
+
   },
    computed: {
     filteredItems() {

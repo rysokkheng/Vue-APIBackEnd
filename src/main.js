@@ -15,15 +15,18 @@ import {
    BootstrapVue, 
   IconsPlugin ,
   VBTooltipPlugin,
+  PaginationPlugin ,
   FormPlugin,
   FormGroupPlugin,
   FormDatepickerPlugin ,
   FormCheckboxPlugin ,
-  FormSelectPlugin   
+  FormSelectPlugin ,
+  TooltipPlugin 
 } from 'bootstrap-vue'
 
-
 Vue.use(FormSelectPlugin);
+Vue.use(PaginationPlugin);
+Vue.use(TooltipPlugin);
 Vue.use(VBTooltipPlugin);
 Vue.use(FormCheckboxPlugin);
 Vue.use(FormDatepickerPlugin);

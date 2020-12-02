@@ -22,21 +22,33 @@ export default new Router({
       name: "dashboard",
       component: () => import('../views/Dashboard.vue')
     },
+    ///////////////////// Route Users All /////////////////////////////
     {
       path: "/users/create",
       name: "usercreate",
       component: () => import('../views/Users/UserCreate.vue')
     },
     {
+      path: "/users/viewer",
+      name: "UserViewer",
+      component: () => import('../views/Users/UserViewer.vue')
+    },
+    {
       path: "/users",
       name: "users",
       component: () => import('../views/Users/Users.vue')
     },
+    //////////////////// End Route User ///////////////////////////
     
     {
       path: "/roles",
       name: "roles",
       component: () => import('../views/Roles/Roles.vue')
+    },
+    {
+      path: "/roles/create",
+      name: "RoleCreate",
+      component: () => import('../views/Roles/RoleCreate.vue')
     },
     {
       path: "*",
