@@ -22,7 +22,6 @@ export default new Router({
       name: "dashboard",
       component: () => import('../views/Dashboard.vue')
     },
-    ///////////////////// Route Users All /////////////////////////////
     {
       path: "/users/create",
       name: "usercreate",
@@ -38,17 +37,30 @@ export default new Router({
       name: "users",
       component: () => import('../views/Users/Users.vue')
     },
-    //////////////////// End Route User ///////////////////////////
-    
     {
       path: "/roles",
       name: "roles",
       component: () => import('../views/Roles/Roles.vue')
     },
     {
+      path: "/permissions",
+      name: "permissions",
+      component: () => import('../views/Permissions/permissions.vue')
+    },
+    {
+      path: "/permissions/create",
+      name: "PermissionCreate",
+      component: () => import('../views/Permissions/PermissionCreate.vue')
+    },
+    {
       path: "/roles/create",
       name: "RoleCreate",
       component: () => import('../views/Roles/RoleCreate.vue')
+    },
+    {
+      path: "/products",
+      name: "Products",
+      component: () => import('../views/Products/Products.vue')
     },
     {
       path: "*",

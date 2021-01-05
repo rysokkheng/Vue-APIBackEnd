@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const REST_ENDPOINT = 'http://127.0.0.1:9999/api/'
+const REST_ENDPOINT = 'http://127.0.0.1:7777/api/'
 const AUTH_TOKEN_KEY = 'authToken'
 
 export function loginUser(username, password) {

@@ -22,8 +22,6 @@ import {logoutUser} from '@/utils/auth.js';
         logoutUser()
       }, 
     },
-    created (){
-    console.log('test')
-    }
+  
   }
 </script>

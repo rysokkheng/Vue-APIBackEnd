@@ -1,6 +1,6 @@
 <template>
 <div class="allmain">
-  <div class="title-main">&nbsp;&nbsp; Users List</div>
+  <div class="title-main">&nbsp;&nbsp; Permissions List</div>
   <div class="twomain">
     <div class="table-responsive">
         <div class="table-wrapper">
@@ -10,7 +10,7 @@
             </div> -->
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-2"><b-button variant="success"  style="color: white;padding: 6px;font-size: 14px;margin-bottom: 19px;" v-on:click="AddUsers()" >Create Users</b-button></div>
+                    <div class="col-sm-2"><b-button variant="success"  style="color: white;padding: 6px;font-size: 14px;margin-bottom: 19px;" v-on:click="AddPermission()" >Create Permissions</b-button></div>
                       <div class="col-sm-7">
                       </div>
                     <div class="col-sm-3">
@@ -27,27 +27,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(item, index) in filteredItems " v-bind:key="index">
+                    <tr v-for="item in filteredItems " v-bind:key="item.id">
                         <td>{{ item.id }}</td>
-                        <td>{{ item.fullname }}</td>
-                        <td>{{ item.username }}</td>
-                        <td>{{ item.email }}</td>
-                        <td>{{ item.phone }}</td>
+                        <td>{{ item.name }}</td>
                         <td><a v-if="item.status=='1'">
                           <b-icon variant="success " icon="check-circle-fill" aria-hidden="true"></b-icon></a>
                           <a v-else><b-icon variant="danger " icon="check-circle" aria-hidden="true"></b-icon></a>
                         </td>
                         <td>{{ item.created_at }}</td>
                         <td>
-                          <b-link href="javascript:void(0)" v-on:click="UserViewer()" ><b-icon variant="success "  icon="eye-fill" aria-hidden="true"></b-icon></b-link>
+                          <b-link href="#foo"><b-icon variant="success " icon="eye-fill" aria-hidden="true"></b-icon></b-link>
                           <b-link href="#foo"><b-icon variant="primary" icon="pencil-fill" aria-hidden="true"></b-icon></b-link>
-                          <b-link href="javascript:void(0)" v-on:click="UsersDelete(item.id,index)" ><b-icon variant="danger" icon="trash-fill" aria-hidden="true"></b-icon></b-link>
+                          <b-link href="#foo"><b-icon variant="danger" icon="trash-fill" aria-hidden="true"></b-icon></b-link>
                         </td>
                     </tr>
                      
                 </tbody>
             </table>
-           
+        
         </div>
     </div>  
   </div>
@@ -69,18 +66,12 @@ export default {
       selected: [],
       headers: [
         { text: 'No', value: 'id' },
-        { text: 'Fullname', value: 'fullname' },
-        { text: 'Username', value: 'username' },
-        { text: 'Email', value: 'email' },
-        { text: 'Phone', value: 'phone' },
+        { text: 'name', value: 'name' },
         { text: 'Status', value: 'status' },
-        {text:  'Create Date', value: 'created_at'},
+        { text: 'Create Date', value: 'created_at'},
         { text: 'Action', value: 'action', sortable: false }
       ],
       items: [],
-     
-
-    
     }
   },
   created: function(){
@@ -88,47 +79,27 @@ export default {
   },
   methods : {
       getData(){
-         this.loading = true;
+          this.loading = true;
           const Token = getAuthToken()
-          const GetUser = http.get('users').then(response => {
+          const GetUser = http.get('permission').then(response => {
             this.items = response.data.data;  
-            console.log(this.items);
-          
-            this.loading = false;
-            
+           
           }).catch((error)=>{
-            console.log(error);
-
-        })                        
+            console.log(error)
+        })                       
       },
-     AddUsers : function () {
-         this.$router.push("/users/create");
+     AddPermission : function () {
+         this.$router.push("/permissions/create");
       },
-     UsersDelete : function(id,index){
-      if(confirm("Do you really want to delete?")){
-        http.delete('/user/'+id)
-        .then(resp => {
-          console.log( this.items)
-            this.items.splice(index,1);
-            return items.id != id;
-        })
-        .catch(error => {
-            console.log(error);
-        })
-      }
-     },
-     UserViewer : function(){
-       this.$router.push("/users/viewer");
-     }
-
+    
   },
    computed: {
     filteredItems() {
       var self = this;
       return this.items.filter(item => {
-         return item.fullname.toLowerCase().indexOf(self.search.toLowerCase()) >= 0 
-             || item.username.toLowerCase().indexOf(self.search.toLowerCase()) >= 0 
-             || item.phone.toLowerCase().indexOf(self.search.toLowerCase()) >= 0;
+         return item.name.toLowerCase().indexOf(self.search.toLowerCase()) >= 0 
+             || item.roles.toLowerCase().indexOf(self.search.toLowerCase()) >= 0 
+             || item.description.toLowerCase().indexOf(self.search.toLowerCase()) >= 0;
               
       }) 
     }

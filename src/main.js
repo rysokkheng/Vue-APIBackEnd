@@ -21,7 +21,8 @@ import {
   FormDatepickerPlugin ,
   FormCheckboxPlugin ,
   FormSelectPlugin ,
-  TooltipPlugin 
+  TooltipPlugin ,
+  MediaPlugin 
 } from 'bootstrap-vue'
 
 Vue.use(FormSelectPlugin);
@@ -34,6 +35,7 @@ Vue.use(FormGroupPlugin);
 Vue.use(FormPlugin);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
+Vue.use(MediaPlugin);
 Vue.use(require('vue-moment'));
 
 

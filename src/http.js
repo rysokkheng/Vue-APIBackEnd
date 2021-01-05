@@ -2,7 +2,7 @@ import axios from 'axios';
 import {getAuthToken} from '@/utils/auth.js';
 
 const http = axios.create ({
-  baseURL: 'http://127.0.0.1:9999/api/',
+  baseURL: 'http://127.0.0.1:7777/api/',
   timeout: 1000,
   headers: {'Content-Type': 'application/json'},
 });
